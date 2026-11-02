@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="intro-box mb-4">
+    <h2 class="page-title mb-2">Service Management</h2>
+    <p class="text-muted mb-4">
+        A simple module to manage the services you offer. You can add, view, edit and delete
+        services, search them by name and filter them by status.
+    </p>
+    <a href="{% url 'service_list' %}" class="btn btn-brand">View Services</a>
+    <a href="{% url 'service_create' %}" class="btn btn-outline-secondary ms-1">+ Add Service</a>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card stat-card">
+            <div class="card-body">
+                <small class="text-muted">Total Services</small>
+                <h3 class="mb-0">{{ total }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <a href="{% url 'service_list' %}?status=active" class="text-decoration-none">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <small class="text-muted">Active</small>
+                    <h3 class="mb-0 text-success">{{ active }}</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{% url 'service_list' %}?status=inactive" class="text-decoration-none">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <small class="text-muted">Inactive</small>
+                    <h3 class="mb-0 text-secondary">{{ inactive }}</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header"><h6 class="page-title mb-0">Management Panel</h6></div>
+            <div class="card-body">
+                <p class="text-muted small">HTML pages built with Django views, forms and templates.</p>
+                <ul class="small mb-0">
+                    <li>Service list with search, status filter and pagination</li>
+                    <li>Add and edit services with form validation</li>
+                    <li>Service details and delete confirmation</li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'service_list' %}" class="small">Open panel &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header"><h6 class="page-title mb-0">REST API</h6></div>
+            <div class="card-body">
+                <p class="text-muted small">JSON API built with Django REST Framework.</p>
+                <ul class="small mb-0">
+                    <li><code>GET / POST</code> &nbsp;/api/services/</li>
+                    <li><code>GET / PUT / PATCH / DELETE</code> &nbsp;/api/services/&lt;id&gt;/</li>
+                    <li><code>?search=</code>, <code>?status=</code>, <code>?page=</code> supported</li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'api_service_list' %}" class="small">Open API &rarr;</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
