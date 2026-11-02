@@ -55,6 +55,14 @@ class ServiceAPITests(APITestCase):
         self.assertEqual(res.data['count'], 1)
         self.assertEqual(res.data['results'][0]['service_name'], 'Massage')
 
+    def test_invalid_status_filter(self):
+        res = self.client.get(self.list_url, {'status': 'xyz'})
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_page_out_of_range(self):
+        res = self.client.get(self.list_url, {'page': 50})
+        self.assertEqual(res.status_code, status.HTTP_404_NOT_FOUND)
+
     def test_detail(self):
         res = self.client.get(self.detail_url)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
