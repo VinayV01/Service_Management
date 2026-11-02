@@ -127,6 +127,7 @@ body {
 .pagination .page-item.active .page-link {
     background-color: var(--brand);
     border-color: var(--brand);
+    color: #fff;
 }
 
 .pagination .page-link {
@@ -157,7 +158,130 @@ a .stat-card:hover {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }
 
+.action-buttons {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.service-name,
+code {
+    word-break: break-word;
+}
+
 .empty-state {
     padding: 40px 0;
     color: #8a929c;
+}
+
+
+/* ---------- responsive ---------- */
+
+/* tablets: hide less important columns */
+@media (max-width: 991.98px) {
+    .table-stack .col-index,
+    .table-stack th:first-child {
+        display: none;
+    }
+}
+
+/* phones: each table row becomes a small card */
+@media (max-width: 767.98px) {
+    .table-stack thead {
+        display: none;
+    }
+
+    .table-stack,
+    .table-stack tbody,
+    .table-stack tr,
+    .table-stack td {
+        display: block;
+        width: 100%;
+    }
+
+    .table-stack tr {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .table-stack tbody tr:last-child {
+        border-bottom: 0;
+    }
+
+    .table-stack td {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 4px 0;
+        border: 0;
+        text-align: right;
+    }
+
+    .table-stack td::before {
+        content: attr(data-label);
+        color: #8a929c;
+        font-size: 0.85rem;
+        text-align: left;
+    }
+
+    .table-stack td.col-name {
+        font-size: 1.05rem;
+        padding-bottom: 8px;
+    }
+
+    .table-stack td.col-name::before {
+        content: none;
+    }
+
+    .table-stack td.col-actions {
+        padding-top: 10px;
+    }
+
+    .table-stack .action-buttons {
+        display: flex;
+        width: 100%;
+    }
+
+    .table-stack .action-buttons .btn {
+        flex: 1;
+    }
+
+    .table-stack .empty-row td {
+        display: block;
+        text-align: center;
+    }
+
+    .table-stack .empty-row td::before {
+        content: none;
+    }
+
+    .intro-box {
+        padding: 20px;
+    }
+
+    .card-header {
+        padding: 12px 16px;
+    }
+}
+
+/* small phones: detail table label above value */
+@media (max-width: 575.98px) {
+    .detail-table tr,
+    .detail-table th,
+    .detail-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .detail-table th {
+        padding-bottom: 0;
+        font-size: 0.85rem;
+    }
+
+    .detail-table td {
+        padding-top: 2px;
+    }
+
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
 }

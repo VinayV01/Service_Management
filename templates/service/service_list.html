@@ -3,7 +3,7 @@
 {% block title %}Services{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
     <div>
         <h4 class="page-title mb-0">Services</h4>
         <small class="text-muted">{{ total }} service{{ total|pluralize }} found</small>
@@ -14,17 +14,17 @@
 <div class="card mb-3">
     <div class="card-body">
         <form method="get" class="row g-2">
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <input type="text" name="q" value="{{ search }}" class="form-control" placeholder="Search by service name">
             </div>
-            <div class="col-md-3">
+            <div class="col-12 col-sm-6 col-md-3">
                 <select name="status" class="form-select">
                     <option value="">All Status</option>
                     <option value="active" {% if status == 'active' %}selected{% endif %}>Active</option>
                     <option value="inactive" {% if status == 'inactive' %}selected{% endif %}>Inactive</option>
                 </select>
             </div>
-            <div class="col-md-3 d-flex gap-2">
+            <div class="col-12 col-sm-6 col-md-3 d-flex gap-2">
                 <button type="submit" class="btn btn-brand w-100">Search</button>
                 <a href="{% url 'service_list' %}" class="btn btn-outline-secondary w-100">Reset</a>
             </div>
@@ -33,57 +33,57 @@
 </div>
 
 <div class="card">
-    <div class="table-responsive">
-        <table class="table table-hover mb-0">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Service Name</th>
-                    <th>Price (₹)</th>
-                    <th>Duration</th>
-                    <th>Status</th>
-                    <th>Created</th>
-                    <th class="text-end">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for service in page_obj %}
-                <tr>
-                    <td class="text-muted">{{ page_obj.start_index|add:forloop.counter0 }}</td>
-                    <td>
-                        <a href="{% url 'service_detail' service.pk %}" class="service-name">{{ service.service_name }}</a>
-                    </td>
-                    <td>{{ service.price }}</td>
-                    <td>{{ service.duration }} min</td>
-                    <td>
-                        {% if service.status == 'active' %}
-                            <span class="badge-status badge-active">Active</span>
-                        {% else %}
-                            <span class="badge-status badge-inactive">Inactive</span>
-                        {% endif %}
-                    </td>
-                    <td class="text-muted">{{ service.created_at|date:"d M Y" }}</td>
-                    <td class="text-end text-nowrap">
+    <table class="table table-hover mb-0 table-stack">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Service Name</th>
+                <th class="text-nowrap">Price (₹)</th>
+                <th>Duration</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in page_obj %}
+            <tr>
+                <td data-label="#" class="text-muted col-index">{{ page_obj.start_index|add:forloop.counter0 }}</td>
+                <td data-label="Service" class="col-name">
+                    <a href="{% url 'service_detail' service.pk %}" class="service-name">{{ service.service_name }}</a>
+                </td>
+                <td data-label="Price (₹)">{{ service.price }}</td>
+                <td data-label="Duration" class="text-nowrap">{{ service.duration }} min</td>
+                <td data-label="Status">
+                    {% if service.status == 'active' %}
+                        <span class="badge-status badge-active">Active</span>
+                    {% else %}
+                        <span class="badge-status badge-inactive">Inactive</span>
+                    {% endif %}
+                </td>
+                <td data-label="Created" class="text-muted text-nowrap">{{ service.created_at|date:"d M Y" }}</td>
+                <td class="text-end col-actions">
+                    <div class="action-buttons">
                         <a href="{% url 'service_detail' service.pk %}" class="btn btn-sm btn-outline-primary">View</a>
                         <a href="{% url 'service_update' service.pk %}" class="btn btn-sm btn-outline-warning">Edit</a>
                         <a href="{% url 'service_delete' service.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="7" class="text-center empty-state">
-                        No services found.
-                        {% if search or status %}
-                            <a href="{% url 'service_list' %}">Clear filters</a>
-                        {% else %}
-                            <a href="{% url 'service_create' %}">Add your first service</a>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr class="empty-row">
+                <td colspan="7" class="text-center empty-state">
+                    No services found.
+                    {% if search or status %}
+                        <a href="{% url 'service_list' %}">Clear filters</a>
+                    {% else %}
+                        <a href="{% url 'service_create' %}">Add your first service</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 <div class="mt-3">

@@ -9,12 +9,14 @@
         A simple module to manage the services you offer. You can add, view, edit and delete
         services, search them by name and filter them by status.
     </p>
-    <a href="{% url 'service_list' %}" class="btn btn-brand">View Services</a>
-    <a href="{% url 'service_create' %}" class="btn btn-outline-secondary ms-1">+ Add Service</a>
+    <div class="d-flex flex-wrap gap-2">
+        <a href="{% url 'service_list' %}" class="btn btn-brand">View Services</a>
+        <a href="{% url 'service_create' %}" class="btn btn-outline-secondary">+ Add Service</a>
+    </div>
 </div>
 
 <div class="row g-3 mb-4">
-    <div class="col-md-4">
+    <div class="col-12 col-sm-4">
         <div class="card stat-card">
             <div class="card-body">
                 <small class="text-muted">Total Services</small>
@@ -22,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-6 col-sm-4">
         <a href="{% url 'service_list' %}?status=active" class="text-decoration-none">
             <div class="card stat-card">
                 <div class="card-body">
@@ -32,7 +34,7 @@
             </div>
         </a>
     </div>
-    <div class="col-md-4">
+    <div class="col-6 col-sm-4">
         <a href="{% url 'service_list' %}?status=inactive" class="text-decoration-none">
             <div class="card stat-card">
                 <div class="card-body">
@@ -45,7 +47,7 @@
 </div>
 
 <div class="row g-3">
-    <div class="col-md-6">
+    <div class="col-12 col-md-6">
         <div class="card h-100">
             <div class="card-header"><h6 class="page-title mb-0">Management Panel</h6></div>
             <div class="card-body">
@@ -61,7 +63,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-12 col-md-6">
         <div class="card h-100">
             <div class="card-header"><h6 class="page-title mb-0">REST API</h6></div>
             <div class="card-body">
